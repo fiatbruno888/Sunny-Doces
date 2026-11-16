@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sunny Doces · Vendas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7c5cd6">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f6f3fb;--card:#fff;--ink:#1f1b24;--mut:#6f6a7a;--pri:#7c5cd6;--onp:#fff;--soft:#efe9fc;--ok:#16a34a;--wa:#d97706;--bad:#dc2626;--line:#e9e4f3;--sh:0 1px 3px rgba(60,40,110,.08),0 6px 16px rgba(60,40,110,.06);color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#141118;--card:#1e1a25;--ink:#f2eef8;--mut:#a39db0;--pri:#a78bfa;--onp:#17121f;--soft:#2a2340;--ok:#4ade80;--wa:#fbbf24;--bad:#f87171;--line:#2e2838;--sh:none;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;display:flex;align-items:center;gap:12px}
+header img{width:44px;height:44px;border-radius:50%;box-shadow:var(--sh)}
+header b{font-size:1.1rem;display:block;line-height:1.1}
+header small{color:var(--mut)}
+main{max-width:560px;margin:0 auto;padding:4px 16px calc(100px + env(safe-area-inset-bottom,0px))}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;border:0;background:none;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;font:inherit;font-size:.72rem;padding:6px;border-radius:12px}
+nav button.on{color:var(--pri);font-weight:700}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+button{font:inherit;cursor:pointer}
+h3{margin:0 0 6px;font-size:1rem}
+.card{background:var(--card);border-radius:18px;padding:14px;box-shadow:var(--sh);margin-top:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.p{position:relative;background:var(--card);border:2px solid transparent;border-radius:18px;padding:14px;box-shadow:var(--sh);text-align:left;color:var(--ink);min-height:100px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.p.on{border-color:var(--pri);background:var(--soft)}
+.p span{color:var(--pri);font-weight:700}
+.badge{position:absolute;top:8px;right:8px;background:var(--pri);color:var(--onp);border-radius:999px;min-width:26px;height:26px;display:grid;place-items:center;font-size:.85rem;font-weight:700;font-style:normal}
+.ln{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.ln small,.sale small{display:block;color:var(--mut);font-size:.8rem}
+.st{display:flex;align-items:center;gap:12px}
+.st button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.2rem;line-height:1}
+label{display:block;font-size:.78rem;color:var(--mut);margin:10px 0 4px}
+input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus{outline:2px solid var(--pri);border-color:transparent}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;gap:8px;margin-top:12px}
+.seg button{flex:1;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.seg button.on{background:var(--pri);color:var(--onp);border-color:var(--pri);font-weight:700}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-size:1.1rem}
+.tot b{font-size:1.6rem}
+.cta{width:100%;margin-top:12px;padding:15px;border:0;border-radius:14px;background:var(--pri);color:var(--onp);font-weight:700;font-size:1rem}
+.chips{display:flex;gap:8px;margin-top:6px}
+.chip{flex:1;padding:9px;border-radius:999px;border:0;background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.chip.on{background:var(--pri);color:var(--onp);font-weight:700}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.sum div{background:var(--card);border-radius:16px;padding:10px;box-shadow:var(--sh)}
+.sum small{display:block;color:var(--mut);font-size:.72rem}
+.sum b{font-size:.98rem}
+.top{display:flex;justify-content:space-between;gap:10px}
+.v{white-space:nowrap}
+.act{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.tag{padding:5px 12px;border-radius:999px;border:1px solid currentColor;background:none;font-size:.78rem}
+.tag.ok{color:var(--ok)}.tag.wa{color:var(--wa)}
+.x{background:none;border:0;color:var(--mut);font-size:.8rem;padding:6px}
+.x.arm{color:var(--bad);font-weight:700}
+.mrow{display:grid;grid-template-columns:1fr 96px auto;gap:8px;align-items:center;padding:10px}
+.empty{color:var(--mut);text-align:center;padding:28px 0}
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header><img src="logo.png" alt="Sunny Doces" width="44" height="44"><div><b>Sunny Doces</b><small id="ttl">Nova venda</small></div></header>
+<main>
+<section id="v-vender">
+  <div class="grid" id="grid"></div>
+  <section class="card" id="co" hidden>
+    <h3>Resumo da venda</h3>
+    <div id="lines"></div>
+    <div class="r2"><div><label for="desc">Desconto (R$)</label><input id="desc" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></div><div><label for="dt">Data</label><input id="dt" type="date"></div></div>
+    <label for="cli">Cliente</label><input id="cli" placeholder="Opcional" autocomplete="off">
+    <label for="obs">Observações</label><input id="obs" placeholder="Ex.: combo com desconto" autocomplete="off">
+    <div class="seg"><button id="bp" class="on">Pago</button><button id="bf">Fiado</button></div>
+    <div class="tot"><span>Total</span><b id="tt">R$ 0,00</b></div>
+    <button class="cta" id="fin">Finalizar venda</button>
+  </section>
+</section>
+<section id="v-vendas" hidden>
+  <div class="chips"><button class="chip" data-p="hoje">Hoje</button><button class="chip" data-p="mes">Este mês</button><button class="chip" data-p="tudo">Tudo</button></div>
+  <div class="sum"><div><small>Vendido</small><b id="s1"></b></div><div><small>Recebido</small><b id="s2" style="color:var(--ok)"></b></div><div><small>A receber</small><b id="s3" style="color:var(--wa)"></b></div></div>
+  <div id="lista"></div>
+</section>
+<section id="v-menu" hidden>
+  <div class="card"><h3>Novo produto</h3>
+    <div class="r2"><input id="mn" placeholder="Nome" autocomplete="off"><input id="mp" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Preço (R$)"></div>
+    <button class="cta" id="madd">Adicionar ao cardápio</button>
+  </div>
+  <div id="mlist"></div>
+</section>
+</main>
+<div id="toast"></div>
+<nav>
+  <button class="on" data-t="vender"><svg viewBox="0 0 24 24"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Vender</button>
+  <button data-t="vendas"><svg viewBox="0 0 24 24"><path d="M5 4h14v17l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 9h6M9 13h6"/></svg>Vendas</button>
+  <button data-t="menu"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>Cardápio</button>
+</nav>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const brl=n=>(+n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const pad=n=>String(n).padStart(2,'0');
+const hoje=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let menu=ld('cardapio-doces',[{id:'m1',n:'Bolo de pote',p:10},{id:'m2',n:'Bolo de copo',p:18},{id:'m3',n:'Pote de docinhos',p:12}]);
+let sales=ld('vendas-doces',[]),cart={},pago=true,per='hoje',armed=null;
+const itens=s=>s.itens||[{n:s.produto,q:s.qtd,p:s.preco}];
+const total=s=>s.total!=null?s.total:(s.qtd||0)*(s.preco||0);
+const sub=()=>menu.reduce((a,m)=>a+(cart[m.id]||0)*m.p,0);
+let tm;const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>e.classList.remove('on'),1800)};
+
+function grid(){
+  $('#grid').innerHTML=menu.map(m=>`<button class="p${cart[m.id]?' on':''}" data-id="${m.id}">${cart[m.id]?`<i class="badge">${cart[m.id]}</i>`:''}<b>${esc(m.n)}</b><span>${brl(m.p)}</span></button>`).join('')||'<div class="empty" style="grid-column:1/-1">Cadastre produtos na aba Cardápio.</div>';
+  const ids=menu.filter(m=>cart[m.id]);
+  $('#co').hidden=!ids.length;
+  $('#lines').innerHTML=ids.map(m=>`<div class="ln"><span>${esc(m.n)}<small>${brl(m.p)}</small></span><div class="st"><button data-m="${m.id}" data-d="-1" aria-label="Diminuir">−</button><b>${cart[m.id]}</b><button data-m="${m.id}" data-d="1" aria-label="Aumentar">+</button></div></div>`).join('');
+  tot();
+}
+function tot(){$('#tt').textContent=brl(Math.max(0,sub()-(parseFloat($('#desc').value)||0)))}
+function setPago(p){pago=p;$('#bp').classList.toggle('on',p);$('#bf').classList.toggle('on',!p)}
+
+function vend(){
+  const h=hoje(),m=h.slice(0,7);
+  const v=sales.filter(s=>per==='tudo'||(per==='hoje'&&s.data===h)||(per==='mes'&&(s.data||'').startsWith(m))).sort((a,b)=>(b.data||'').localeCompare(a.data||'')||(b.criado||0)-(a.criado||0));
+  let t=0,r=0;v.forEach(s=>{const x=total(s);t+=x;if(s.pago)r+=x});
+  $('#s1').textContent=brl(t);$('#s2').textContent=brl(r);$('#s3').textContent=brl(t-r);
+  $$('.chip').forEach(b=>b.classList.toggle('on',b.dataset.p===per));
+  $('#lista').innerHTML=v.length?v.map(s=>`<div class="card sale"><div class="top"><div><b>${itens(s).map(i=>esc(i.q)+'× '+esc(i.n)).join(', ')}</b><small>${esc(s.cliente?s.cliente+' · ':'')}${String(s.data||'').split('-').reverse().join('/')}${s.desconto?' · desconto '+brl(s.desconto):''}</small>${s.obs?`<small>📝 ${esc(s.obs)}</small>`:''}</div><b class="v">${brl(total(s))}</b></div><div class="act"><button class="tag ${s.pago?'ok':'wa'}" data-pg="${s.id}">${s.pago?'Pago ✓':'Fiado · marcar como pago'}</button><button class="x${armed===s.id?' arm':''}" data-del="${s.id}">${armed===s.id?'Toque para confirmar':'Excluir'}</button></div></div>`).join(''):'<div class="empty">Nenhuma venda neste período.</div>';
+}
+function mn(){
+  $('#mlist').innerHTML=menu.map((m,i)=>`<div class="card mrow"><input data-i="${i}" data-k="n" value="${esc(m.n)}" aria-label="Nome"><input data-i="${i}" data-k="p" type="number" inputmode="decimal" step="0.01" min="0" value="${m.p}" aria-label="Preço"><button class="x${armed==='m'+i?' arm':''}" data-md="${i}">${armed==='m'+i?'Excluir?':'🗑'}</button></div>`).join('')||'<div class="empty">Nenhum produto ainda.</div>';
+}
+function go(t){
+  armed=null;
+  ['vender','vendas','menu'].forEach(x=>$('#v-'+x).hidden=x!==t);
+  $$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  $('#ttl').textContent={vender:'Nova venda',vendas:'Vendas',menu:'Cardápio'}[t];
+  if(t==='vender')grid();if(t==='vendas')vend();if(t==='menu')mn();
+  scrollTo(0,0);
+}
+
+$$('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));
+$('#grid').onclick=e=>{const b=e.target.closest('[data-id]');if(!b)return;cart[b.dataset.id]=(cart[b.dataset.id]||0)+1;grid()};
+$('#lines').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;const id=b.dataset.m;cart[id]=(cart[id]||0)+(+b.dataset.d);if(cart[id]<=0)delete cart[id];grid()};
+$('#desc').oninput=tot;
+$('#bp').onclick=()=>setPago(true);$('#bf').onclick=()=>setPago(false);
+$('#dt').value=hoje();
+$('#fin').onclick=()=>{
+  const its=menu.filter(m=>cart[m.id]).map(m=>({n:m.n,q:cart[m.id],p:m.p}));if(!its.length)return;
+  const d=Math.min(sub(),Math.max(0,parseFloat($('#desc').value)||0));
+  sales.push({id:'s'+Date.now(),itens:its,desconto:d,total:sub()-d,cliente:$('#cli').value.trim(),obs:$('#obs').value.trim(),data:$('#dt').value||hoje(),pago,criado:Date.now()});
+  sv('vendas-doces',sales);cart={};['desc','cli','obs'].forEach(i=>$('#'+i).value='');$('#dt').value=hoje();setPago(true);grid();toast('Venda registrada ✓');
+};
+$$('.chip').forEach(b=>b.onclick=()=>{per=b.dataset.p;vend()});
+$('#lista').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.pg){const s=sales.find(x=>x.id===b.dataset.pg);if(s){s.pago=!s.pago;sv('vendas-doces',sales);vend()}}
+  else if(b.dataset.del){const id=b.dataset.del;if(armed===id){armed=null;sales=sales.filter(x=>x.id!==id);sv('vendas-doces',sales)}else armed=id;vend()}
+};
+$('#madd').onclick=()=>{
+  const n=$('#mn').value.trim(),p=parseFloat($('#mp').value);
+  if(!n||!(p>=0)){toast('Informe o nome e o preço');return}
+  menu.push({id:'m'+Date.now(),n,p});sv('cardapio-doces',menu);$('#mn').value='';$('#mp').value='';mn();toast('Produto adicionado ✓');
+};
+$('#mlist').onchange=e=>{
+  const i=e.target.dataset.i;if(i==null)return;const m=menu[i],k=e.target.dataset.k;
+  if(k==='n'){const v=e.target.value.trim();if(v)m.n=v;else e.target.value=m.n}
+  else{const v=parseFloat(e.target.value);if(v>=0)m.p=v;else e.target.value=m.p}
+  sv('cardapio-doces',menu);toast('Cardápio atualizado ✓');
+};
+$('#mlist').onclick=e=>{
+  const b=e.target.closest('[data-md]');if(!b)return;const i=+b.dataset.md;
+  if(armed==='m'+i){armed=null;delete cart[menu[i].id];menu.splice(i,1);sv('cardapio-doces',menu)}else armed='m'+i;mn();
+};
+grid();
+if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js')}catch(e){}}
+</script>
+</body>
+</html>
