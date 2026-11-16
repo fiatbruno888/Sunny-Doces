@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sunny Doces · Vendas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#b39ddb">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#faf7ff;--card:#ffffff;--ink:#231f20;--mut:#7b7288;--acc:#b39ddb;--accink:#231f20;--ok:#15803d;--warn:#b45309;--line:#e7def8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1412;--card:#2a1f1b;--ink:#f6e9e2;--mut:#b49a8f;--acc:#b39ddb;--accink:#1c1412;--ok:#4ade80;--warn:#fbbf24;--line:#3d2e28;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1412;--card:#2a1f1b;--ink:#f6e9e2;--mut:#b49a8f;--acc:#b39ddb;--accink:#1c1412;--ok:#4ade80;--warn:#fbbf24;--line:#3d2e28;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:16px 14px 40px}
+h1{font-size:1.3rem;margin:4px 0 12px}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.sum .card{padding:10px}
+.sum small{display:block;color:var(--mut);font-size:.72rem}
+.sum b{font-size:1.02rem}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+.chips{display:flex;gap:8px;margin:12px 0}
+.chip{flex:1;padding:9px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.9rem}
+.chip.on{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:600}
+label{display:block;font-size:.8rem;color:var(--mut);margin:8px 0 3px}
+input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay{display:flex;gap:8px;margin-top:10px}
+.pay button{flex:1}
+button{font:inherit;cursor:pointer}
+.btn{width:100%;margin-top:12px;padding:13px;border:0;border-radius:12px;background:var(--acc);color:var(--accink);font-weight:700}
+.opt{padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.opt.on{border-color:var(--acc);background:var(--acc);color:var(--accink);font-weight:600}
+.sub{color:var(--mut);font-size:.85rem;margin:-8px 0 12px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.brand img{width:64px;height:64px;border-radius:50%;flex:none}
+.brand h1{margin:0}
+.brand .sub{margin:2px 0 0}
+.prods{display:grid;gap:8px}
+.prod{display:flex;justify-content:space-between;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.prod.on{border-color:var(--acc);background:var(--acc);color:var(--accink);font-weight:700}
+.item{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
+.item .t{font-weight:600}
+.item .m{color:var(--mut);font-size:.8rem}
+.item .r{text-align:right;white-space:nowrap}
+.tag{display:inline-block;margin-top:4px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.75rem;color:var(--ink)}
+.tag.fiado{color:var(--warn);border-color:var(--warn)}
+.tag.pago{color:var(--ok);border-color:var(--ok)}
+.x{background:none;border:0;color:var(--mut);font-size:.75rem;margin-left:8px;padding:4px}
+.x.arm{color:#dc2626;font-weight:700}
+.note{color:var(--mut);font-size:.8rem;text-align:center;margin:10px 0}
+.empty{color:var(--mut);text-align:center;padding:22px 0}
+</style>
+</head>
+<body>
+<main>
+<div class="brand"><img src="logo.png" alt="Sunny Doces" width="64" height="64"><div><h1>Sunny Doces</h1><div class="sub">Controle de vendas</div></div></div>
+
+<div class="sum">
+  <div class="card"><small>Vendido</small><b id="s1">R$ 0,00</b></div>
+  <div class="card"><small>Recebido</small><b class="ok" id="s2">R$ 0,00</b></div>
+  <div class="card"><small>A receber</small><b class="warn" id="s3">R$ 0,00</b></div>
+</div>
+
+<div class="card">
+  <strong>Nova venda</strong>
+  <label>Doce</label>
+  <div class="prods" id="prods"></div>
+  <div class="row">
+    <div><label for="qtd">Quantidade</label><input id="qtd" type="number" inputmode="numeric" min="1" value="1"></div>
+    <div><label for="preco">Preço unitário (R$)</label><input id="preco" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></div>
+  </div>
+  <label for="obs">Observações (ex.: combinado com desconto)</label>
+  <input id="obs" placeholder="Opcional" autocomplete="off">
+  <label for="cliente">Cliente (opcional)</label>
+  <input id="cliente" placeholder="Nome do cliente" autocomplete="off">
+  <label for="data">Data</label>
+  <input id="data" type="date">
+  <div class="pay">
+    <button type="button" class="opt on" id="pago">Pago</button>
+    <button type="button" class="opt" id="fiado">Fiado</button>
+  </div>
+  <div id="total" class="note">Total: R$ 0,00</div>
+  <button type="button" class="btn" id="salvar">Registrar venda</button>
+  <div id="erro" class="note warn" hidden></div>
+</div>
+
+<div class="chips">
+  <button class="chip on" data-f="hoje">Hoje</button>
+  <button class="chip" data-f="mes">Este mês</button>
+  <button class="chip" data-f="tudo">Tudo</button>
+</div>
+
+<div id="lista-vendas"></div>
+<div id="aviso" class="note"></div>
+</main>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var brl=function(n){return (n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})};
+var pad=function(n){return String(n).padStart(2,'0')};
+var hoje=function(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var sales=[],filtro='hoje',store=null,aviso='',pago=true,armed=null;
+
+/* ---------- armazenamento ---------- */
+function localStore(cb){
+  var K='vendas-doces',a=[];
+  try{a=JSON.parse(localStorage.getItem(K)||'[]')}catch(e){}
+  function save(){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}cb(a.slice())}
+  cb(a.slice());
+  return{
+    add:function(d){a.push(Object.assign({id:'l'+Date.now()},d));save();return Promise.resolve()},
+    upd:function(id,p){a=a.map(function(x){return x.id===id?Object.assign({},x,p):x});save();return Promise.resolve()},
+    del:function(id){a=a.filter(function(x){return x.id!==id});save();return Promise.resolve()}
+  };
+}
+function dbStore(db,cb){
+  var c=db.collection('vendas');
+  var t=setTimeout(function(){aviso='Os dados ainda não responderam. O que você vê pode estar desatualizado.';render()},10000);
+  c.onSnapshot(function(snap){
+    if(!snap.metadata.fromCache){clearTimeout(t);aviso=''}
+    cb(snap.docs.map(function(d){return Object.assign({id:d.id},d.data())}));
+  },function(){clearTimeout(t);aviso='Não foi possível carregar os dados.';render()});
+  return{
+    add:function(d){return c.add(d)},
+    upd:function(id,p){return c.doc(id).update(p)},
+    del:function(id){return c.doc(id).delete()}
+  };
+}
+function setSales(a){sales=a;render()}
+
+/* ---------- tela ---------- */
+function visiveis(){
+  var h=hoje(),m=h.slice(0,7);
+  return sales.filter(function(s){
+    return filtro==='tudo'||(filtro==='hoje'&&s.data===h)||(filtro==='mes'&&String(s.data||'').indexOf(m)===0);
+  }).sort(function(a,b){return (b.data||'').localeCompare(a.data||'')||(b.criado||0)-(a.criado||0)});
+}
+function render(){
+  var v=visiveis(),tot=0,rec=0;
+  v.forEach(function(s){var t=(s.qtd||0)*(s.preco||0);tot+=t;if(s.pago)rec+=t});
+  $('#s1').textContent=brl(tot);$('#s2').textContent=brl(rec);$('#s3').textContent=brl(tot-rec);
+  document.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('on',b.dataset.f===filtro)});
+  var el=$('#lista-vendas');
+  if(!v.length){el.innerHTML='<div class="empty">Nenhuma venda neste período.</div>'}
+  else{
+    el.innerHTML=v.map(function(s){
+      var t=(s.qtd||0)*(s.preco||0);
+      var dt=String(s.data||'').split('-').reverse().join('/');
+      return '<div class="card item"><div><div class="t">'+esc(s.produto)+' × '+esc(s.qtd)+'</div>'
+        +'<div class="m">'+esc(s.cliente?s.cliente+' · ':'')+dt+' · '+brl(s.preco)+' cada</div>'+(s.obs?'<div class="m">📝 '+esc(s.obs)+'</div>':'')
+        +'<button class="tag '+(s.pago?'pago':'fiado')+'" data-act="pg" data-id="'+esc(s.id)+'">'+(s.pago?'Pago ✓':'Fiado · marcar como pago')+'</button>'
+        +'<button class="x'+(armed===s.id?' arm':'')+'" data-act="del" data-id="'+esc(s.id)+'">'+(armed===s.id?'Toque de novo para excluir':'Excluir')+'</button></div>'
+        +'<div class="r"><b>'+brl(t)+'</b></div></div>';
+    }).join('');
+  }
+  $('#aviso').textContent=aviso;
+}
+function atualizaTotal(){
+  var t=(parseFloat($('#qtd').value)||0)*(parseFloat($('#preco').value)||0);
+  $('#total').textContent='Total: '+brl(t);
+}
+function setPago(p){pago=p;$('#pago').classList.toggle('on',p);$('#fiado').classList.toggle('on',!p)}
+
+/* ---------- eventos ---------- */
+$('#data').value=hoje();
+$('#pago').onclick=function(){setPago(true)};
+$('#fiado').onclick=function(){setPago(false)};
+$('#qtd').oninput=atualizaTotal;
+$('#preco').oninput=atualizaTotal;
+var CARDAPIO=[{n:'Bolo de pote',p:10},{n:'Bolo de copo',p:18},{n:'Pote de docinhos',p:12}];
+var sel=null;
+function desenhaProdutos(){
+  $('#prods').innerHTML=CARDAPIO.map(function(c,i){return '<button type="button" class="prod'+(sel===i?' on':'')+'" data-i="'+i+'"><span>'+c.n+'</span><span>'+brl(c.p)+'</span></button>'}).join('');
+}
+$('#prods').onclick=function(e){
+  var b=e.target.closest('button[data-i]');if(!b)return;
+  sel=+b.dataset.i;$('#preco').value=CARDAPIO[sel].p;desenhaProdutos();atualizaTotal();
+};
+desenhaProdutos();
+document.querySelectorAll('.chip').forEach(function(b){b.onclick=function(){filtro=b.dataset.f;render()}});
+$('#salvar').onclick=function(){
+  var erro=$('#erro'),p=sel==null?'':CARDAPIO[sel].n,q=parseFloat($('#qtd').value),pr=parseFloat($('#preco').value);
+  if(!p||!(q>0)||!(pr>=0)){erro.textContent='Escolha o doce e confira a quantidade e o preço.';erro.hidden=false;return}
+  if(!store){erro.textContent='Aguarde um instante e tente de novo.';erro.hidden=false;return}
+  erro.hidden=true;
+  store.add({produto:p,qtd:q,preco:pr,cliente:$('#cliente').value.trim(),obs:$('#obs').value.trim(),data:$('#data').value||hoje(),pago:pago,criado:Date.now()})
+    .catch(function(){erro.textContent='Não consegui salvar. Tente de novo.';erro.hidden=false});
+  sel=null;desenhaProdutos();$('#obs').value='';$('#qtd').value='1';$('#preco').value='';$('#cliente').value='';setPago(true);atualizaTotal();
+};
+$('#lista-vendas').onclick=function(e){
+  var b=e.target.closest('button[data-act]');if(!b||!store)return;
+  var id=b.dataset.id;
+  if(b.dataset.act==='pg'){
+    var s=sales.filter(function(x){return x.id===id})[0];
+    if(s)store.upd(id,{pago:!s.pago});
+  }else{
+    if(armed===id){armed=null;store.del(id)}else{armed=id;render()}
+  }
+};
+
+/* ---------- início ---------- */
+render();
+store=localStore(setSales);aviso='Os dados ficam salvos neste aparelho.';render();
+if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js')}catch(e){}}
+})();
+</script>
+</body>
+</html>
